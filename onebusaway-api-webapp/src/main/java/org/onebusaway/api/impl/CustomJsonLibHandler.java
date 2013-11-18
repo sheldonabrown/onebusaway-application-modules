@@ -55,13 +55,8 @@ public class CustomJsonLibHandler implements ContentTypeHandler {
     }
   }
 
-  public String fromObject(Object obj, String resultCode, Writer stream)
+  public String fromObject(Object obj, String resultCode, Writer stream, String callback)
       throws IOException {
-
-    String callback = null;
-    HttpServletRequest req = ServletActionContext.getRequest();
-    if (req != null)
-      callback = req.getParameter("callback");
 
     String value = null;
 
@@ -85,6 +80,17 @@ public class CustomJsonLibHandler implements ContentTypeHandler {
     return null;
   }
 
+  public String fromObject(Object obj, String resultCode, Writer stream)
+      throws IOException {
+
+    String callback = null;
+    HttpServletRequest req = ServletActionContext.getRequest();
+    if (req != null)
+      callback = req.getParameter("callback");
+
+    return fromObject(obj, resultCode, stream, callback);
+  }  
+  
   private boolean isArray(Object obj) {
     return obj instanceof Collection<?> || obj.getClass().isArray();
   }

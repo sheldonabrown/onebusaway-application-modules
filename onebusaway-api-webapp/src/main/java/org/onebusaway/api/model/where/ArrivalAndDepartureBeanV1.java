@@ -17,6 +17,8 @@ package org.onebusaway.api.model.where;
 
 import java.io.Serializable;
 
+import org.onebusaway.api.actions.api.where.HidePredictionSupport;
+
 public class ArrivalAndDepartureBeanV1 implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -82,11 +84,14 @@ public class ArrivalAndDepartureBeanV1 implements Serializable {
   }
 
   public long getPredictedArrivalTime() {
+    if (HidePredictionSupport.isEnabled())
+      return -1;
     return predictedArrivalTime;
   }
 
   public void setPredictedArrivalTime(long predictedArrivalTime) {
-    this.predictedArrivalTime = predictedArrivalTime;
+    if (!HidePredictionSupport.isEnabled())
+      this.predictedArrivalTime = predictedArrivalTime;
   }
 
   public long getScheduledArrivalTime() {
@@ -98,11 +103,14 @@ public class ArrivalAndDepartureBeanV1 implements Serializable {
   }
 
   public long getPredictedDepartureTime() {
+    if (HidePredictionSupport.isEnabled())
+      return -1;
     return predictedDepartureTime;
   }
 
   public void setPredictedDepartureTime(long predictedDepartureTime) {
-    this.predictedDepartureTime = predictedDepartureTime;
+    if (!HidePredictionSupport.isEnabled())
+      this.predictedDepartureTime = predictedDepartureTime;
   }
 
   public long getScheduledDepartureTime() {

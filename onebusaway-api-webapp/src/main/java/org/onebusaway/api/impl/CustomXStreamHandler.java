@@ -18,6 +18,7 @@ package org.onebusaway.api.impl;
 
 import org.apache.struts2.rest.handler.XStreamHandler;
 import org.onebusaway.api.actions.api.ValidationErrorBean;
+import org.onebusaway.api.actions.api.where.HidePredictionSupport;
 import org.onebusaway.api.model.ResponseBean;
 import org.onebusaway.api.model.TimeBean;
 import org.onebusaway.api.model.transit.AgencyV2Bean;
@@ -156,8 +157,10 @@ public class CustomXStreamHandler extends XStreamHandler {
 
     xstream.alias("timeRange", TimeRangeV2Bean.class);
 
-    xstream.alias("VehicleLocation", VehicleLocation.class);
-
+    if (!HidePredictionSupport.isEnabled()) {
+      xstream.alias("VehicleLocation", VehicleLocation.class);
+    }
+    
     xstream.alias("itineraries", ItinerariesV2Bean.class);
     xstream.alias("itinerary", ItineraryV2Bean.class);
     xstream.alias("location", LocationV2Bean.class);
@@ -174,15 +177,18 @@ public class CustomXStreamHandler extends XStreamHandler {
     xstream.alias("edge", EdgeV2Bean.class);
 
     xstream.alias("currentVehicleEstimate", CurrentVehicleEstimateV2Bean.class);
-    
-    xstream.alias("registeredAlarm", RegisteredAlarmV2Bean.class);
 
-    xstream.processAnnotations(VehicleMonitoringRequest.class);
-    xstream.processAnnotations(VehicleMonitoringDetailLevel.class);
-    xstream.processAnnotations(ServiceRequestContext.class);
-    xstream.processAnnotations(Siri.class);
-    xstream.processAnnotations(ErrorMessage.class);
-    xstream.processAnnotations(MonitoredStopVisit.class);
+    if (!HidePredictionSupport.isEnabled()) {
+
+      xstream.alias("registeredAlarm", RegisteredAlarmV2Bean.class);
+
+      xstream.processAnnotations(VehicleMonitoringRequest.class);
+      xstream.processAnnotations(VehicleMonitoringDetailLevel.class);
+      xstream.processAnnotations(ServiceRequestContext.class);
+      xstream.processAnnotations(Siri.class);
+      xstream.processAnnotations(ErrorMessage.class);
+      xstream.processAnnotations(MonitoredStopVisit.class);
+    }
     return xstream;
   }
 }
