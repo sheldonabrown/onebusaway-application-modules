@@ -127,7 +127,7 @@ public class ArrivalsAndDeparturesForStopAction extends ApiActionSupport {
       StopBean stop = bean.getStop();
       
       ArrivalAndDepartureBeanV1 v1 = new ArrivalAndDepartureBeanV1();
-      if (!HidePredictionSupport.isEnabled()) {
+      if (!HideRealTimeSupport.isEnabled()) {
     	  v1.setPredictedArrivalTime(bean.getPredictedArrivalTime());
     	  v1.setPredictedDepartureTime(bean.getPredictedDepartureTime());
       }

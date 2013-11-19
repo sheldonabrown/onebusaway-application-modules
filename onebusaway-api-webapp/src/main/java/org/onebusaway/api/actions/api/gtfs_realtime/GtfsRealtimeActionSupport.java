@@ -19,7 +19,7 @@ import java.util.Date;
 
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.onebusaway.api.actions.api.ApiActionSupport;
-import org.onebusaway.api.actions.api.where.HidePredictionSupport;
+import org.onebusaway.api.actions.api.where.HideRealTimeSupport;
 import org.onebusaway.exceptions.ServiceException;
 import org.onebusaway.transit_data.services.TransitDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +78,7 @@ public abstract class GtfsRealtimeActionSupport extends ApiActionSupport {
     if (hasErrors())
       return setValidationErrorsResponse();
     
-    if (HidePredictionSupport.isEnabled()) {
+    if (HideRealTimeSupport.isEnabled()) {
     	return setResourceNotFoundResponse();
     }
 

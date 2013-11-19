@@ -18,7 +18,7 @@ package org.onebusaway.api.impl;
 
 import org.apache.struts2.rest.handler.XStreamHandler;
 import org.onebusaway.api.actions.api.ValidationErrorBean;
-import org.onebusaway.api.actions.api.where.HidePredictionSupport;
+import org.onebusaway.api.actions.api.where.HideRealTimeSupport;
 import org.onebusaway.api.model.ResponseBean;
 import org.onebusaway.api.model.TimeBean;
 import org.onebusaway.api.model.transit.AgencyV2Bean;
@@ -157,7 +157,7 @@ public class CustomXStreamHandler extends XStreamHandler {
 
     xstream.alias("timeRange", TimeRangeV2Bean.class);
 
-    if (!HidePredictionSupport.isEnabled()) {
+    if (!HideRealTimeSupport.isEnabled()) {
       xstream.alias("VehicleLocation", VehicleLocation.class);
     }
     
@@ -178,7 +178,7 @@ public class CustomXStreamHandler extends XStreamHandler {
 
     xstream.alias("currentVehicleEstimate", CurrentVehicleEstimateV2Bean.class);
 
-    if (!HidePredictionSupport.isEnabled()) {
+    if (!HideRealTimeSupport.isEnabled()) {
 
       xstream.alias("registeredAlarm", RegisteredAlarmV2Bean.class);
 

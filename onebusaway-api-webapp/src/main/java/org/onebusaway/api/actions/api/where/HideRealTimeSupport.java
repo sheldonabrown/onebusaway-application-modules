@@ -1,8 +1,8 @@
 package org.onebusaway.api.actions.api.where;
 
-public class HidePredictionSupport {
+public class HideRealTimeSupport {
 	private static boolean _hidePredictions = System.getProperties().containsKey(
-		      HidePredictionSupport.class.getName());
+		      HideRealTimeSupport.class.getName());
 
 		  public static boolean isEnabled() {
 		    return _hidePredictions;
